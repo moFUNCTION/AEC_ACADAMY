@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../axiosConfig/axiosInstance";
 import { useAuth } from "../../Context/UserDataProvider/UserDataProvider";
-export const useFetch = ({ endpoint, params, headers, ...rest }) => {
-  const { user, refreshToken } = useAuth();
+export const useFetch = ({ endpoint, params = {}, headers, ...rest }) => {
+  const { user } = useAuth();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(undefined);
+
   const getData = async () => {
     try {
       setLoading(true);

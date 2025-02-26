@@ -33,6 +33,8 @@ export const CourseCard = ({
   created_at,
   level,
   transition = "0.3s",
+  children,
+  isLink = true,
   ...rest
 }) => {
   const LevelColor = () => {
@@ -50,7 +52,7 @@ export const CourseCard = ({
   const inView = useInView(ref);
   return (
     <Card
-      as={Link}
+      as={isLink && Link}
       to={`/courses/${id}`}
       ref={ref}
       border="1px"
@@ -136,6 +138,7 @@ export const CourseCard = ({
               </Text>
             </Button>
           </Flex>
+          {children}
         </Stack>
       </CardBody>
     </Card>

@@ -55,8 +55,27 @@ const TabsMenuValues = [
     ],
   },
   {
+    title: "Users",
+    Icon: FaUsers,
+    childsLinks: [
+      {
+        title: "Students",
+        href: "Users?Role=students",
+      },
+      {
+        title: "Instructors",
+        href: "Users?Role=instructors",
+      },
+      {
+        title: "Admins",
+        href: "Users?Role=admins",
+      },
+    ],
+  },
+  {
     title: "Courses",
     Icon: CiVideoOn,
+    href: "courses",
   },
   {
     title: "Analytics",

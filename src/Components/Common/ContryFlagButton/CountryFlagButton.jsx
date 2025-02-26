@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Button, Image, Spinner, Skeleton } from "@chakra-ui/react";
 import axios from "axios";
 
-export const CountryFlagButton = ({ countryCode, onClick }) => {
+export const CountryFlagButton = ({
+  countryCode,
+  onClick,
+  viewName = () => {},
+  ...rest
+}) => {
   const [country, setCountry] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -38,8 +43,9 @@ export const CountryFlagButton = ({ countryCode, onClick }) => {
   }
 
   return (
-    <Button onClick={onClick} p={1} variant="ghost">
+    <Button {...rest} gap="4" onClick={onClick} p={1} variant="ghost">
       <Image src={country.flag} alt={country.name} boxSize="20px" />
+      {viewName(country?.name)}
     </Button>
   );
 };

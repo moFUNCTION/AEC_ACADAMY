@@ -41,7 +41,7 @@ export default function Index() {
     setStatusSelected(search.get("status"));
   }, [search.get("status")]);
   const [page, setPage] = useState(1);
-  const { data, loading, error } = useFetch({
+  const { data, loading, error, HandleRender } = useFetch({
     endpoint: "instractor-application",
     params: {
       page,
@@ -50,7 +50,13 @@ export default function Index() {
   console.log(data);
   return (
     <Stack gap="3" p="5" w="100%" h="100%">
-      <Flex p="2" justifyContent="space-between" alignItems="center">
+      <Flex
+        wrap="wrap"
+        p="2"
+        justifyContent="space-between"
+        alignItems="center"
+        gap="5"
+      >
         <Heading size="md">Instructor Applciations</Heading>
         <SearchField size="lg">
           <Title>Search For A Application</Title>
@@ -64,6 +70,8 @@ export default function Index() {
         alignItems="center"
         borderRadius="lg"
         p="2"
+        wrap="wrap"
+        gap="5"
       >
         <Heading size="md">Status</Heading>
         <Flex as={Skeleton} isLoaded={!loading} justifyContent="start" gap="5">
@@ -94,7 +102,9 @@ export default function Index() {
         minH="200px"
       >
         {data?.results?.map((item) => {
-          return <ApplicationCard {...item} key={item.id} />;
+          return (
+            <ApplicationCard {...item} key={item.id} onRender={HandleRender} />
+          );
         })}
       </Flex>
 

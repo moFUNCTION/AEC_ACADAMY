@@ -110,7 +110,7 @@ export const MobileTabMenu = ({ TabsValues }) => {
     onClose();
   }, [pathname]);
   return (
-    <Drawer onClose={onClose} size="sm" isOpen={isOpen} placement="right">
+    <Drawer onClose={onClose} size="sm" isOpen={isOpen} placement="left">
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />

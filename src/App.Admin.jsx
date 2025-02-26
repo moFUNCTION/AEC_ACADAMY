@@ -12,6 +12,12 @@ const Main = lazy(() =>
 const Applications = lazy(() =>
   import("./Pages/Feutures/Admin/AuthenticatedRoutes/Applications/@View/Index")
 );
+const Users = lazy(() =>
+  import("./Pages/Feutures/Admin/AuthenticatedRoutes/Users/@View/Index")
+);
+const Courses = lazy(() =>
+  import("./Pages/Feutures/Admin/AuthenticatedRoutes/Courses/@View/Index")
+);
 function App() {
   const { user } = useAuth();
   const { pathname } = useLocation();
@@ -49,6 +55,9 @@ function App() {
             }
           >
             <Route path="applications" element={<Applications />} />
+            <Route path="*" element={<div />} />
+            <Route path="Users" element={<Users />} />
+            <Route path="courses" element={<Courses />} />
           </Route>
         </Routes>
         <Footer />
