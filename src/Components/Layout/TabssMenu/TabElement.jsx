@@ -19,8 +19,6 @@ import {
 // }
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 export const TabElement = ({ expand, title, href, icon, childLinks }) => {
-  console.log(childLinks);
-
   return (
     <Tooltip label={!expand && title}>
       {childLinks && expand ? (

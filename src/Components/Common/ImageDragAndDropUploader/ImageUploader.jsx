@@ -5,6 +5,7 @@ import {
   Flex,
   IconButton,
   Image,
+  Stack,
 } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 import { FileUploader } from "react-drag-drop-files";
@@ -16,6 +17,8 @@ export const ImageUploader = ({
   onChangeImage,
   onRemoveImage,
   label,
+  BtnLabelProps,
+  isInvalid,
   ...rest
 }) => {
   const ImageSrc = useMemo(() => {
@@ -39,6 +42,7 @@ export const ImageUploader = ({
     >
       {ImageSrc ? (
         <Box
+          w="100%"
           maxW="600px"
           minH="300px"
           minW="200px"
@@ -88,6 +92,7 @@ export const ImageUploader = ({
           <LazyLoadedImage
             ImageProps={{
               transition: "0.3s",
+              objectFit: "contain",
             }}
             decoding="async"
             loading="lazy"
@@ -99,15 +104,26 @@ export const ImageUploader = ({
         </Box>
       ) : (
         <>
-          <Button colorScheme="blue">{label}</Button>
-          <Flex justifyContent="center" w="100%" overflow="hidden">
-            <FileUploader
-              handleChange={onChangeImage}
-              name="file"
-              types={["png", "jpg"]}
-              classes="drop_zone"
-            />
-          </Flex>
+          <Button
+            variant="outline"
+            colorScheme={isInvalid ? "red" : "blue"}
+            minH="fit-content"
+            pos="relative"
+            w="100%"
+            maxW="600px"
+            {...BtnLabelProps}
+          >
+            <Stack opacity="0" pos="absolute" h="100%" w="100%" zIndex="10">
+              <FileUploader
+                handleChange={onChangeImage}
+                name="file"
+                types={["png", "jpg"]}
+                classes="drop_zone file-drop"
+              />
+            </Stack>
+
+            {label}
+          </Button>
         </>
       )}
     </Box>

@@ -28,6 +28,7 @@ export const InputElement = forwardRef(
       containerStyles,
       as,
       noIcon,
+      heightAlignedCenter,
       ...rest
     },
     ref
@@ -36,7 +37,12 @@ export const InputElement = forwardRef(
       <Stack w="100%" {...containerStyles}>
         <InputGroup variant="filled">
           {Icon && !noIcon && (
-            <InputLeftElement h="100%" pointerEvents="none">
+            <InputLeftElement
+              sx={{
+                [(!as || heightAlignedCenter) && "h"]: "100%",
+              }}
+              pointerEvents="none"
+            >
               <Icon
                 style={{
                   color: "gray",
@@ -57,7 +63,12 @@ export const InputElement = forwardRef(
             {...rest}
           />
           {errors[errorRef] && (
-            <InputRightElement pointerEvents="none">
+            <InputRightElement
+              sx={{
+                [!as && "h"]: "100%",
+              }}
+              pointerEvents="none"
+            >
               <MdCancel
                 style={{
                   color: "red",

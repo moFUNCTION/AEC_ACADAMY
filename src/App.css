@@ -48,3 +48,8 @@
   direction: rtl !important;
   text-align: right !important;
 }
+.file-drop {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: 100% !important;
+}

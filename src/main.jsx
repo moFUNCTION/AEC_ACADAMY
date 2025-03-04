@@ -40,6 +40,9 @@ const getUserRole = () => {
 if (getUserRole() === "Instructor" && route !== "instructor") {
   BaseNavigationHandler("./instructor");
 }
+if (getUserRole() === "Admin" && route !== "admin") {
+  BaseNavigationHandler("./admin");
+}
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

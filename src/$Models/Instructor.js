@@ -2,7 +2,8 @@ import { ImageUploader } from "../@Firebase/Utils/Common/ImageUploader/ImageUplo
 import { tryCatch } from "../Utils/TryAndCatchHandler/TryAndCatchHandler";
 import { Student } from "./Student";
 import axiosInstance from "../axiosConfig/axiosInstance";
-
+import { Course } from "./Utils/Course";
+import { Section } from "./Utils/Section";
 export class Instructor extends Student {
   static async CreateApplication({
     UserId,
@@ -199,4 +200,7 @@ export class Instructor extends Student {
       LoginData,
     };
   }
+
+  static Course = Course;
+  static Section = Section;
 }

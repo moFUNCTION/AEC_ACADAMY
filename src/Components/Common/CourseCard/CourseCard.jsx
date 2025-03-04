@@ -22,6 +22,7 @@ import { MdTimer } from "react-icons/md";
 import { formatRelativeTime } from "../../../Utils/GetRelativeTime/GetRelativeTime";
 import { transform, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useFetch } from "../../../Hooks/Index";
 export const CourseCard = ({
   title,
   image = "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
@@ -34,6 +35,8 @@ export const CourseCard = ({
   level,
   transition = "0.3s",
   children,
+  average_rating = 0,
+  total_enrollments = 0,
   isLink = true,
   ...rest
 }) => {
@@ -50,6 +53,15 @@ export const CourseCard = ({
   };
   const ref = useRef();
   const inView = useInView(ref);
+  const {
+    loading: UserLodaing,
+    error: UserError,
+    data: UserData,
+  } = useFetch({
+    endpoint: `/user/${user?.id || user}/`,
+  });
+  console.log(UserData, "KOKO");
+
   return (
     <Card
       as={isLink && Link}
@@ -110,11 +122,11 @@ export const CourseCard = ({
             </Badge>
             <Button gap="3" variant="ghost">
               <BsPeople />
-              120
+              {total_enrollments}
             </Button>
             <Button alignItems="center" gap="3" variant="ghost">
               <LiaStarSolid color="orange" size="20px" />
-              4.7
+              {average_rating}
             </Button>
           </Flex>
           <Heading mt="2" size="md">
@@ -122,19 +134,25 @@ export const CourseCard = ({
           </Heading>
 
           <Flex gap="4" alignItems="center" mt="2">
-            <IconButton w="fit-content" h="fit-content" borderRadius="full">
+            <IconButton
+              isLoading={UserLodaing}
+              w="fit-content"
+              h="fit-content"
+              borderRadius="full"
+            >
               <Avatar
                 size="md"
-                src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"
+                src={UserData?.data?.profile_pic}
+                name={UserData?.data?.name}
               />
             </IconButton>
             <Text fontSize="sm" color="gray.500">
-              William Samy
+              {UserData?.data?.name}
             </Text>
             <Button ml="auto" gap="3" variant="ghost">
               <BsClock size="15px" />
               <Text color="gray.600" fontSize="xs">
-                {formatRelativeTime(created_at)}
+                {created_at && formatRelativeTime(created_at)}
               </Text>
             </Button>
           </Flex>

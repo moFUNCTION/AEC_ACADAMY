@@ -21,7 +21,7 @@ import { BsCalendarDate } from "react-icons/bs";
 import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 
 export const ChakraDatePicker = ({
-  placeholder = "تحديد الميعاد",
+  placeholder,
   onChange,
   value,
   minDate,

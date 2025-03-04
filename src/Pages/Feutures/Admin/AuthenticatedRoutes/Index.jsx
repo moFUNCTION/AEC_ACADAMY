@@ -26,6 +26,8 @@ import { MdOutlineAssignment } from "react-icons/md";
 import { MdOutlinePlayLesson } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import { TfiVideoCamera } from "react-icons/tfi";
+import { BiSolidCategory } from "react-icons/bi";
+import { FaRegNoteSticky } from "react-icons/fa6";
 const TabsMenuValues = [
   {
     title: <Text>Hi {getUserData().name} In The Dashboard</Text>,
@@ -92,6 +94,21 @@ const TabsMenuValues = [
   {
     title: "Sections",
     Icon: TfiVideoCamera,
+  },
+  {
+    title: "Categories",
+    Icon: BiSolidCategory,
+    href: "categories",
+  },
+  {
+    title: "Sub Categories",
+    Icon: BiSolidCategory,
+    href: "sub-categories",
+  },
+  {
+    title: "Assigments Types",
+    Icon: FaRegNoteSticky,
+    href: "assigments-types",
   },
 ];
 

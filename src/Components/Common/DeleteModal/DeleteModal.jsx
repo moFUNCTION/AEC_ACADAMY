@@ -24,7 +24,7 @@ export const DeleteModal = ({ isOpen, onClose, onDelete, isLoading }) => {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>هل انت متأكد من الحذف</ModalHeader>
+        <ModalHeader>Are You Sure To Delete this Item</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Stack justifyContent="center" alignItems="center">
@@ -44,7 +44,7 @@ export const DeleteModal = ({ isOpen, onClose, onDelete, isLoading }) => {
             colorScheme="blue"
             onClick={onClose}
           >
-            غلق
+            Close
           </Button>
           <Button
             colorScheme="blue"
@@ -54,7 +54,7 @@ export const DeleteModal = ({ isOpen, onClose, onDelete, isLoading }) => {
             }}
             isLoading={isLoading}
           >
-            تأكيد
+            Confirm
           </Button>
         </ModalFooter>
       </ModalContent>

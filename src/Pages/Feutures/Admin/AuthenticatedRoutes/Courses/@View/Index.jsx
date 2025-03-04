@@ -5,9 +5,11 @@ import {
   Heading,
   Skeleton,
   Stack,
+  useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useFetch } from "../../../../../../Hooks/Index";
+import { useApiRequest, useFetch } from "../../../../../../Hooks/Index";
 import {
   CourseCard,
   Pagination,
@@ -15,14 +17,86 @@ import {
   Title,
 } from "../../../../../../Components/Common/Index";
 import { Link } from "react-router-dom";
+import { Admin } from "../../../../../../$Models/Admin";
+import { DeleteModal } from "../../../../../../Components/Common/DeleteModal/DeleteModal";
+const ExtendedCourseCard = ({ item, index, toaster, onRender }) => {
+  const [isLoading, setLoading] = useState();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const HandleDelete = async () => {
+    setLoading(true);
+    const { error, data } = await Admin.Course.Delete({ id: item?.id });
+    setLoading(false);
+    if (error) {
+      toaster({
+        title: "Error In Delete Course",
+        status: "error",
+      });
+      onClose();
+      onRender();
+    } else {
+      toaster({
+        title: "Course Deleted Successfully",
+        status: "success",
+      });
+      onClose();
+      onRender();
+    }
+  };
+  return (
+    <>
+      <DeleteModal
+        isLoading={isLoading}
+        isOpen={isOpen}
+        onClose={onClose}
+        onDelete={HandleDelete}
+      />
+      <CourseCard
+        {...item}
+        key={item.id}
+        transition={`${(index + 1) * 0.2}s`}
+        isLink={false}
+      >
+        <Flex gap="3" justifyContent="center" wrap="wrap" mt="2">
+          <Button
+            onClick={() =>
+              localStorage.setItem("CourseData", JSON.stringify(item))
+            }
+            as={Link}
+            to={item.id}
+            colorScheme="blue"
+            variant="outline"
+          >
+            View
+          </Button>
+          <Button
+            as={Link}
+            to={`${item.id}/update`}
+            colorScheme="green"
+            variant="outline"
+          >
+            Edit
+          </Button>
+          <Button onClick={onOpen} colorScheme="red" variant="outline">
+            Delete
+          </Button>
+        </Flex>
+      </CourseCard>
+    </>
+  );
+};
+
 export default function Index() {
+  const toast = useToast({
+    position: "top-right",
+    duration: 3000,
+    isClosable: true,
+  });
   const [page, setPage] = useState(1);
 
-  const { data, loading, error } = useFetch({
+  const { data, loading, error, HandleRender } = useFetch({
     endpoint: "courses",
     params: { page },
   });
-  console.log(data);
   return (
     <Stack gap="3" p="5" w="100%" h="100%">
       <Flex
@@ -62,34 +136,13 @@ export default function Index() {
       >
         {data?.results?.map((item, index) => {
           return (
-            <CourseCard
-              {...item}
+            <ExtendedCourseCard
+              toaster={toast}
               key={item.id}
-              transition={`${(index + 1) * 0.2}s`}
-              isLink={false}
-            >
-              <Flex gap="3" justifyContent="center" wrap="wrap" mt="2">
-                <Button
-                  as={Link}
-                  to={item.id}
-                  colorScheme="blue"
-                  variant="outline"
-                >
-                  View
-                </Button>
-                <Button
-                  as={Link}
-                  to={`${item.id}/update`}
-                  colorScheme="green"
-                  variant="outline"
-                >
-                  Edit
-                </Button>
-                <Button colorScheme="red" variant="outline">
-                  Delete
-                </Button>
-              </Flex>
-            </CourseCard>
+              item={item}
+              index={index}
+              onRender={HandleRender}
+            />
           );
         })}
       </Flex>

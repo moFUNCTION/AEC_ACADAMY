@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useFetch } from "../../../../../Hooks/Index";
+import { Levels } from "../../../../../~Data/Levels";
 const Languages = [
   {
     title: "Arabic",
@@ -30,20 +31,7 @@ const Languages = [
     title: "Espanol",
   },
 ];
-const Levels = [
-  {
-    title: "all",
-  },
-  {
-    title: "beginner",
-  },
-  {
-    title: "intermediate",
-  },
-  {
-    title: "advanced",
-  },
-];
+
 const Status = [
   {
     title: "Online",
