@@ -7,6 +7,7 @@ import Categories from "./Sections/Categories";
 import Instrctors from "./Sections/Instrctors";
 import LastestNews from "./Sections/LastestNews";
 import OurClients from "./Sections/OurClients";
+import { Footer } from "../../Components/Layout/Index";
 
 export default function Index() {
   return (
@@ -19,6 +20,7 @@ export default function Index() {
         <Instrctors />
         <LastestNews />
         <OurClients />
+        <Footer />
       </Stack>
     </>
   );

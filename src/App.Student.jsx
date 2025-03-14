@@ -98,7 +98,6 @@ function App() {
           <Route path="courses" element={<Courses />} />
           <Route path="courses/:id" element={<Course_Id />} />
         </Routes>
-        <Footer />
       </LazyPageWrapper>
     </>
   );
