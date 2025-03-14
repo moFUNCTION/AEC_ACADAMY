@@ -60,7 +60,6 @@ export const CourseCard = ({
   } = useFetch({
     endpoint: `/user/${user?.id || user}/`,
   });
-  console.log(UserData, "KOKO");
 
   return (
     <Card
@@ -142,12 +141,12 @@ export const CourseCard = ({
             >
               <Avatar
                 size="md"
-                src={UserData?.data?.profile_pic}
-                name={UserData?.data?.name}
+                src={UserData?.data?.profile_pic || user?.profile_pic}
+                name={UserData?.data?.name || user?.name}
               />
             </IconButton>
             <Text fontSize="sm" color="gray.500">
-              {UserData?.data?.name}
+              {UserData?.data?.name || user?.name}
             </Text>
             <Button ml="auto" gap="3" variant="ghost">
               <BsClock size="15px" />

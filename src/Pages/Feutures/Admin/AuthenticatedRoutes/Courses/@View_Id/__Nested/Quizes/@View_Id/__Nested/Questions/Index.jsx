@@ -1,4 +1,12 @@
-import { Button, Flex, Skeleton, Stack, Text } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertIcon,
+  Button,
+  Flex,
+  Skeleton,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useFetch } from "../../../../../../../../../../../Hooks/useFetch/useFetch";
 import { Link, useParams } from "react-router-dom";
@@ -38,6 +46,14 @@ export default function Index() {
     created_at,
     updatedAt,
   } = data || { questions: {} };
+  if (questions?.length === 0 && !loading) {
+    return (
+      <Alert size="lg" status="warning">
+        <AlertIcon />
+        No Questions Found
+      </Alert>
+    );
+  }
   return (
     <Stack overflow="hidden" as={Skeleton} isLoaded={!loading}>
       <Flex gap="3">
@@ -85,14 +101,6 @@ export default function Index() {
         size={questions?.length}
         currentPage={currentQuestion}
       />
-      <Flex gap="3">
-        <Button as={Link} to={`update/${_id}`} colorScheme="green" size="lg">
-          Update
-        </Button>
-        <Button colorScheme="red" size="lg">
-          Delete
-        </Button>
-      </Flex>
     </Stack>
   );
 }

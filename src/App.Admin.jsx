@@ -92,6 +92,10 @@ const CourseLessonAdd = lazy(() =>
     "./Pages/Feutures/Admin/AuthenticatedRoutes/Courses/@View_Id/__Nested/Lessons/@Add/Index"
   )
 );
+
+const Analytics = lazy(() =>
+  import("./Pages/Feutures/Admin/AuthenticatedRoutes/Analytics/Index")
+);
 function App() {
   const { user } = useAuth();
   const { pathname } = useLocation();
@@ -141,6 +145,7 @@ function App() {
             }
           >
             <Route path="/" element={<UserProfile />} />
+            <Route path="Analytics" element={<Analytics />} />
             <Route path="/user" element={<UserProfile />} />
             <Route path="applications" element={<Applications />} />
             <Route path="*" element={<div style={{ minHeight: "100vh" }} />} />

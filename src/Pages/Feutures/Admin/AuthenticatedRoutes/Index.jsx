@@ -82,18 +82,7 @@ const TabsMenuValues = [
   {
     title: "Analytics",
     Icon: IoAnalyticsOutline,
-  },
-  {
-    title: "Quizes",
-    Icon: MdOutlineAssignment,
-  },
-  {
-    title: "Lessons",
-    Icon: MdOutlinePlayLesson,
-  },
-  {
-    title: "Sections",
-    Icon: TfiVideoCamera,
+    href: "analytics",
   },
   {
     title: "Categories",

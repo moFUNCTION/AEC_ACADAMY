@@ -3,7 +3,7 @@ import axiosInstance from "../../axiosConfig/axiosInstance";
 import { useAuth } from "../../Context/UserDataProvider/UserDataProvider";
 export const useFetch = ({ endpoint, params = {}, headers, ...rest }) => {
   const { user } = useAuth();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(undefined);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(undefined);
 

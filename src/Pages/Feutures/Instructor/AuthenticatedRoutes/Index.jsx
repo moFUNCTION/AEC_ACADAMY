@@ -68,6 +68,7 @@ export default function Index() {
   } = useFetch({
     endpoint: `/instractor-application/${user?.data?.id}/`,
   });
+  console.log(ApplicationData);
 
   return (
     <TabsMenuExpandProvider>
@@ -142,7 +143,9 @@ export default function Index() {
                           }}
                           animationData={AnimationData}
                         />
-                        <Heading size="md">Your Application is Refused</Heading>
+                        <Heading size="md">
+                          Your Application is {ApplicationData?.status}
+                        </Heading>
                         <Button colorScheme="blue" w="100%" maxW="300px">
                           Refresh
                         </Button>
