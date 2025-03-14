@@ -57,9 +57,24 @@ const CourseQuizes = lazy(() =>
     "./Pages/Feutures/Admin/AuthenticatedRoutes/Courses/@View_Id/__Nested/Quizes/@View/Index"
   )
 );
+const CourseQuiz = lazy(() =>
+  import(
+    "./Pages/Feutures/Admin/AuthenticatedRoutes/Courses/@View_Id/__Nested/Quizes/@View_Id/Index"
+  )
+);
 const CourseQuizAdd = lazy(() =>
   import(
     "./Pages/Feutures/Admin/AuthenticatedRoutes/Courses/@View_Id/__Nested/Quizes/@Add/Index"
+  )
+);
+const CourseQuizQuestionsAdd = lazy(() =>
+  import(
+    "./Pages/Feutures/Admin/AuthenticatedRoutes/Courses/@View_Id/__Nested/Quizes/@View_Id/__Nested/AddQuestionsAssignment/Index"
+  )
+);
+const CourseQuizQuestions = lazy(() =>
+  import(
+    "./Pages/Feutures/Admin/AuthenticatedRoutes/Courses/@View_Id/__Nested/Quizes/@View_Id/__Nested/Questions/Index"
   )
 );
 const AssigmentsTypes = lazy(() =>
@@ -70,6 +85,11 @@ const AssigmentsTypes = lazy(() =>
 const CourseLessons = lazy(() =>
   import(
     "./Pages/Feutures/Admin/AuthenticatedRoutes/Courses/@View_Id/__Nested/Lessons/@View/Index"
+  )
+);
+const CourseLessonAdd = lazy(() =>
+  import(
+    "./Pages/Feutures/Admin/AuthenticatedRoutes/Courses/@View_Id/__Nested/Lessons/@Add/Index"
   )
 );
 function App() {
@@ -137,8 +157,16 @@ function App() {
                   element={<CourseSectionUpdate />}
                 />
                 <Route path="quizes" element={<CourseQuizes />} />
+                <Route path="quizes/:quizId" element={<CourseQuiz />}>
+                  <Route path="questions" element={<CourseQuizQuestions />} />
+                  <Route
+                    path="UpdateQuestions"
+                    element={<CourseQuizQuestionsAdd />}
+                  />
+                </Route>
                 <Route path="quizes/add" element={<CourseQuizAdd />} />
                 <Route path="lessons" element={<CourseLessons />} />
+                <Route path="lessons/add" element={<CourseLessonAdd />} />
                 <Route path="*" element />
               </Route>
             </Route>

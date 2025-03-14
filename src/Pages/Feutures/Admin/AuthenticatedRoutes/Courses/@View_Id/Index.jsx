@@ -1,4 +1,4 @@
-import { Button, Flex, Skeleton, Stack } from "@chakra-ui/react";
+import { Box, Button, Flex, Skeleton, Stack } from "@chakra-ui/react";
 import React from "react";
 import { CourseCard } from "../../../../../../Components/Common/Index";
 import { Link, Outlet, useParams } from "react-router-dom";
@@ -48,13 +48,12 @@ export default function Index() {
         base: "wrap",
         lg: "nowrap",
       }}
-      justifyContent="center"
+      alignItems="start"
     >
       <Skeleton
         w="lg"
         flexGrow="1"
         maxW="100%"
-        h="fit-content"
         isLoaded={!loading}
         borderRadius="2xl"
       >

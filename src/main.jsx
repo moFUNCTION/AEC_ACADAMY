@@ -1,6 +1,10 @@
 import { lazy, StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import { ChakraProvider, CircularProgress } from "@chakra-ui/react";
+import {
+  ChakraProvider,
+  CircularProgress,
+  extendTheme,
+} from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 import { UserDataProvider } from "./Context/UserDataProvider/UserDataProvider";
 import { LazyPageWrapper, StyledLoader } from "./Components/Common/Index";
@@ -50,7 +54,16 @@ createRoot(document.getElementById("root")).render(
       {MainRoutes.map((Route) => {
         if (route === Route.href) {
           return (
-            <ChakraProvider key={Route.href}>
+            <ChakraProvider
+              toastOptions={{
+                defaultProps: {
+                  position: "top-right",
+                  duration: 3000,
+                  isClosable: true,
+                },
+              }}
+              key={Route.href}
+            >
               <UserDataProvider>
                 <BrowserRouter basename={`/${Route.href}`}>
                   <TabsMenuExpandProvider>

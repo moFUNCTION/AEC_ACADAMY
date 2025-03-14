@@ -2,6 +2,7 @@
   padding: 0%;
   margin: 0%;
   box-sizing: border-box;
+  text-transform: capitalize;
 }
 
 ::-webkit-scrollbar {
@@ -19,11 +20,14 @@
 }
 
 @keyframes Show_Up_Animation {
-  from {
+  0% {
     opacity: 0;
     translate: 0px 100%;
   }
-  to {
+  50% {
+    opacity: 0.5;
+  }
+  100% {
     opacity: 1;
     translate: 0px 0%;
   }
@@ -38,7 +42,7 @@
 }
 
 .show-up-animation {
-  animation: 1 Show_Up_Animation 0.2s linear;
+  animation: 1 Show_Up_Animation 0.3s linear;
 }
 .show-opacity-animation {
   will-change: opacity;

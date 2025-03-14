@@ -11,8 +11,6 @@ import {
   HStack,
   Icon,
   Button,
-  ChakraProvider,
-  extendTheme,
 } from "@chakra-ui/react";
 import { FaFileUpload, FaCheckCircle } from "react-icons/fa";
 import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -25,9 +23,9 @@ export const UploadProgressModal = ({
   status = "uploading",
 }) => {
   const formatFileSize = (bytes) => {
-    if (bytes < 1024) return `${bytes} بايت`;
-    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} كيلوبايت`;
-    return `${(bytes / (1024 * 1024)).toFixed(1)} ميجابايت`;
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   };
 
   const getStatusColor = () => {
@@ -55,11 +53,11 @@ export const UploadProgressModal = ({
   const getStatusText = () => {
     switch (status) {
       case "uploading":
-        return "جاري رفع الملف";
+        return "Uploading file";
       case "success":
-        return "اكتمل الرفع";
+        return "Upload complete";
       case "error":
-        return "فشل الرفع";
+        return "Upload failed";
       default:
         return "";
     }
@@ -68,22 +66,16 @@ export const UploadProgressModal = ({
   return (
     <Modal isOpen={isOpen} isCentered>
       <ModalOverlay />
-      <ModalContent
-        borderRadius="lg"
-        boxShadow="xl"
-        maxWidth="400px"
-        p={4}
-        direction="rtl"
-      >
+      <ModalContent borderRadius="lg" boxShadow="xl" maxWidth="400px" p={4}>
         <ModalHeader>
-          <HStack spacing={3} align="center" flexDirection="row-reverse">
+          <HStack spacing={3} align="center">
             {renderStatusIcon()}
             <Text fontWeight="bold">{getStatusText()}</Text>
           </HStack>
         </ModalHeader>
         <ModalBody>
           <VStack spacing={4} width="full">
-            <VStack spacing={2} width="full" align="flex-end">
+            <VStack spacing={2} width="full" align="flex-start">
               <Text fontSize="sm" fontWeight="semibold">
                 {fileName}
               </Text>
@@ -100,24 +92,20 @@ export const UploadProgressModal = ({
               borderRadius="full"
             />
 
-            <HStack
-              width="full"
-              justifyContent="space-between"
-              flexDirection="row-reverse"
-            >
+            <HStack width="full" justifyContent="space-between">
               <Text fontSize="sm" fontWeight="medium" color={getStatusColor()}>
                 {status === "uploading"
-                  ? `تم رفع ${uploadProgress}%`
+                  ? `Uploaded ${uploadProgress}%`
                   : status === "success"
-                  ? "تم الرفع بنجاح"
-                  : "فشل الرفع"}
+                  ? "Upload successful"
+                  : "Upload failed"}
               </Text>
               {status !== "uploading" && (
                 <Button
                   size="sm"
                   colorScheme={status === "success" ? "green" : "red"}
                 >
-                  {status === "success" ? "إغلاق" : "إعادة المحاولة"}
+                  {status === "success" ? "Close" : "Retry"}
                 </Button>
               )}
             </HStack>

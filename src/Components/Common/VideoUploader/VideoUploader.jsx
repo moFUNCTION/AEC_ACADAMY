@@ -8,8 +8,8 @@ export const VideoUploader = ({
   containerStyles,
   onChange,
   video,
-  uploadingTitle = "رفع فيديو",
-  EditTitle = "تغيير الفيديو",
+  uploadingTitle = "Upload Video",
+  EditTitle = "Change Video",
 }) => {
   const uniqueId = useMemo(() => {
     return `video-Uploader=${Math.random()}`;
@@ -109,7 +109,7 @@ export const VideoUploader = ({
               {EditTitle.trim()}
             </Button>
             <Button colorScheme="red" onClick={() => onChange(undefined)}>
-              حذف
+              delete
             </Button>
           </Flex>
         </>

@@ -50,12 +50,12 @@ export const PDFUploader = ({ pdf, onChangePdf, onRemovePdf }) => {
             />
           </AspectRatio>
           <ButtonGroup gap="10px">
-            <Tooltip label="ازالة الpdf">
+            <Tooltip label="remove Pdf">
               <IconButton onClick={onRemovePdf} colorScheme="red">
                 <GiCancel />
               </IconButton>
             </Tooltip>
-            <Tooltip label="تغيير الpdf">
+            <Tooltip label="Change Pdf">
               <Button colorScheme="green">
                 <label
                   htmlFor="1"
@@ -85,7 +85,7 @@ export const PDFUploader = ({ pdf, onChangePdf, onRemovePdf }) => {
         </Box>
       ) : (
         <>
-          <Button colorScheme="orange">ملفات</Button>
+          <Button colorScheme="orange">Files</Button>
           <FileUploader
             handleChange={onChangePdf}
             name="file"

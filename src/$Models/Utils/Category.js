@@ -1,82 +1,50 @@
 import { tryCatch } from "../../Utils/TryAndCatchHandler/TryAndCatchHandler";
 import axiosInstance from "../../axiosConfig/axiosInstance";
 
-export class Category {
+class BaseCategory {
   constructor({ title }) {
     this.title = title;
   }
-  async Add() {
-    const { error, data } = await tryCatch(async () => {
-      return await axiosInstance.post("/categories/", {
-        title: this.title,
-      });
-    });
-    if (error) {
-      return {
-        error,
-      };
-    }
-    return {
-      data,
-    };
-  }
-  async Update(id) {
-    const { error, data } = await tryCatch(async () => {
-      return await axiosInstance.put(`/categories/${id}/`, {
-        title: this.title,
-      });
-    });
 
-    if (error) {
-      return { error };
-    }
-
-    return { data };
+  async Add(endpoint) {
+    return tryCatch(() => axiosInstance.post(endpoint, { title: this.title }));
   }
 
-  static async Delete({ id }) {
-    return tryCatch(async () => {
-      return axiosInstance.delete(`/categories/${id}/`);
-    });
+  async Update(id, endpoint) {
+    return tryCatch(() =>
+      axiosInstance.put(`${endpoint}/${id}/`, { title: this.title })
+    );
+  }
+
+  static async Delete(id, endpoint) {
+    return tryCatch(() => axiosInstance.delete(`${endpoint}/${id}/`));
   }
 }
 
-export class SubCategory {
-  constructor({ title }) {
-    this.title = title;
-  }
+export class Category extends BaseCategory {
   async Add() {
-    const { error, data } = await tryCatch(async () => {
-      return await axiosInstance.post("/sub-categories/", {
-        title: this.title,
-      });
-    });
-    if (error) {
-      return {
-        error,
-      };
-    }
-    return {
-      data,
-    };
+    return super.Add("/categories/");
   }
+
   async Update(id) {
-    const { error, data } = await tryCatch(async () => {
-      return await axiosInstance.put(`/sub-categories/${id}/`, {
-        title: this.title,
-      });
-    });
-
-    if (error) {
-      return { error };
-    }
-
-    return { data };
+    return super.Update(id, "/categories");
   }
 
-  static async Delete({ id }) {
-    return tryCatch(async () => {
-      return axiosInstance.delete(`/sub-categories/${id}/`);
-    });
+  static async Delete(id) {
+    return super.Delete(id, "/categories");
+  }
+}
+
+export class SubCategory extends BaseCategory {
+  async Add() {
+    return super.Add("/sub-categories/");
+  }
+
+  async Update(id) {
+    return super.Update(id, "/sub-categories");
+  }
+
+  static async Delete(id) {
+    return super.Delete(id, "/sub-categories");
   }
 }

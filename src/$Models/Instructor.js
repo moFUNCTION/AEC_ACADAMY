@@ -4,6 +4,7 @@ import { Student } from "./Student";
 import axiosInstance from "../axiosConfig/axiosInstance";
 import { Course } from "./Utils/Course";
 import { Section } from "./Utils/Section";
+import { Assigment } from "./Utils/Assigments";
 export class Instructor extends Student {
   static async CreateApplication({
     UserId,
@@ -203,4 +204,5 @@ export class Instructor extends Student {
 
   static Course = Course;
   static Section = Section;
+  static Assignment = Assigment;
 }
